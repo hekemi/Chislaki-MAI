@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчет значения численными методами</title>
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Расчет значения численными методами</h1>
+        <form method="post" action="{% url 'calculate' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="method">Выберите метод:</label>
+                <select id="method" name="method" required>
+                    <option value="">--Выберите метод--</option>
+                    <option value="bisection">Метод бисекции</option>
+                    <option value="newton">Метод Ньютона</option>
+                    <option value="secant">Метод секущих</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="function">Введите функцию f(x):</label>
+                <input type="text" id="function" name="function" placeholder="Например: x**2 - 2" required>
+            </div>
+        </form>
+    </div>
