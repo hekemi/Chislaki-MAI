@@ -3,4 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('api/parse-latex/', views.parse_latex, name='parse_latex'),
+    path('api/latex-help/', views.get_latex_help, name='latex_help'),
 ]

@@ -3,26 +3,130 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Расчет значения численными методами</title>
-    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рассчётка по численным методам</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+    <!-- MathJax для рендеринга формул -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Расчет значения численными методами</h1>
-        <form method="post" action="{% url 'calculate' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="method">Выберите метод:</label>
-                <select id="method" name="method" required>
-                    <option value="">--Выберите метод--</option>
-                    <option value="bisection">Метод бисекции</option>
-                    <option value="newton">Метод Ньютона</option>
-                    <option value="secant">Метод секущих</option>
-                </select>
+        <h1>Ввод функций LaTeX</h1>
+        
+        <div class="latex-input-section">
+            <label for="latex-input">Введите функцию (LaTeX):</label>
+            <div class="input-wrapper">
+                <textarea 
+                    id="latex-input" 
+                    placeholder="Например: \sin(1) + \frac{2}{2}"
+                    rows="3"
+                ></textarea>
             </div>
-            <div class="form-group">
-                <label for="function">Введите функцию f(x):</label>
-                <input type="text" id="function" name="function" placeholder="Например: x**2 - 2" required>
+        </div>
+        
+        <div class="preview-section">
+            <h3>Превью формулы:</h3>
+            <div id="formula-preview" class="formula-preview">
+                <p class="placeholder">Формула появится здесь</p>
             </div>
-        </form>
+        </div>
+        
+        <div class="result-section">
+            <h3>Распаршеный результат:</h3>
+            <div id="parsed-result" class="result-box">
+                <p class="placeholder">Результат парсирования появится здесь</p>
+            </div>
+            
+            <div id="error-message" class="error-box" style="display: none;">
+                <p></p>
+            </div>
+        </div>
+        
     </div>
+    
+    <script>
+        const latexInput = document.getElementById('latex-input');
+        const formulaPreview = document.getElementById('formula-preview');
+        const parsedResult = document.getElementById('parsed-result');
+        const errorDiv = document.getElementById('error-message');
+        
+        // CSRF token
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value 
+            || getCookie('csrftoken');
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Live preview при вводе
+        latexInput.addEventListener('input', async (e) => {
+            const latex = e.target.value;
+            
+            if (!latex.trim()) {
+                formulaPreview.innerHTML = '<p class="placeholder">Формула появится здесь</p>';
+                parsedResult.innerHTML = '<p class="placeholder">Результат парсирования появится здесь</p>';
+                errorDiv.style.display = 'none';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/parse-latex/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify({ latex: latex })
+                });
+                
+                const data = await response.json();
+                
+                if (data.valid) {
+                    // Показываем preview с MathJax
+                    formulaPreview.innerHTML = `$$${latex}$$`;
+                    
+                    // Показываем распаршеный результат
+                    parsedResult.innerHTML = `<p><strong>Результат:</strong> <code>${data.parsed}</code></p>`;
+                    
+                    errorDiv.style.display = 'none';
+                    
+                    // Перерендериваем MathJax
+                    MathJax.typesetPromise([formulaPreview]).catch(err => console.log(err));
+                } else {
+                    errorDiv.querySelector('p').textContent = data.error;
+                    errorDiv.style.display = 'block';
+                    formulaPreview.innerHTML = '<p class="placeholder">Ошибка в формуле</p>';
+                    parsedResult.innerHTML = '<p class="placeholder">Ошибка при парсировании</p>';
+                }
+            } catch (error) {
+                errorDiv.querySelector('p').textContent = 'Ошибка сервера: ' + error.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+        
+        // Загрузка справки
+        fetch('/api/latex-help/')
+            .then(r => r.json())
+            .then(data => {
+                const list = document.getElementById('commands-list');
+                data.commands.forEach(cmd => {
+                    const li = document.createElement('li');
+                    li.textContent = cmd;
+                    list.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
