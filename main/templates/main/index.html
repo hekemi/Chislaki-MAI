@@ -6,52 +6,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Рассчётка по численным методам</title>
     <link rel="stylesheet" href="{% static 'main/styles.css' %}">
-    <!-- MathJax для рендеринга формул -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Ввод функций LaTeX</h1>
+    <div class="main-layout">
+        <!-- Левая панель с вкладками -->
+        <aside class="sidebar">
+            <h2>Задания</h2>
+            <nav class="tasks-nav">
+                <button class="task-btn active" data-task="task-1">
+                    <span class="task-number">1</span>
+                    <span class="task-title">Решение СЛАУ</span>
+                </button>
+                <button class="task-btn" data-task="task-2">
+                    <span class="task-number">2</span>
+                    <span class="task-title">Интерполяция</span>
+                </button>
+                <button class="task-btn" data-task="task-3">
+                    <span class="task-number">3</span>
+                    <span class="task-title">Тест ввода</span>
+                </button>
+            </nav>
+        </aside>
         
-        <div class="latex-input-section">
-            <label for="latex-input">Введите функцию (LaTeX):</label>
-            <div class="input-wrapper">
-                <textarea 
-                    id="latex-input" 
-                    placeholder="Например: \sin(1) + \frac{2}{2}"
-                    rows="3"
-                ></textarea>
+        <!-- Основной контент -->
+        <main class="content">
+            <div class="container">
+                <h1>Численные методы - Рассчётка</h1>
+                
+                <!-- Задание 1: Решение СЛАУ -->
+                <section id="task-1" class="task-section active">
+                    <div class="task-header">
+                        <h2>Задание 1: Решение СЛАУ</h2>
+                        <p class="task-description">
+                            Решить СЛАУ с точностью ε = 0.01 методом Гаусса или методом простой итерации
+                        </p>
+                    </div>
+                    
+                    <div class="task-content">
+                        <!-- Матрица A через LaTeX -->
+                        <div class="form-group">
+                            <label for="matrix-latex-a">Введите матрицу A (LaTeX):</label>
+                            <textarea 
+                                id="matrix-latex-a"
+                                placeholder="Например: \begin{pmatrix} 2 & 1 & 0 \\ 1 & 3 & 1 \\ 0 & 1 & 2 \end{pmatrix}"
+                                rows="4"
+                            ></textarea>
+                            <div id="matrix-a-preview" class="formula-preview" style="margin-top: 10px;">
+                                <p class="placeholder">Превью матрицы A</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Вектор b через LaTeX -->
+                        <div class="form-group">
+                            <label for="vector-latex-b">Введите вектор b (LaTeX):</label>
+                            <textarea 
+                                id="vector-latex-b"
+                                placeholder="Например: \begin{pmatrix} 3 \\ 4 \\ 5 \end{pmatrix}"
+                                rows="3"
+                            ></textarea>
+                            <div id="vector-b-preview" class="formula-preview" style="margin-top: 10px;">
+                                <p class="placeholder">Превью вектора b</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Метод -->
+                        <div class="form-group">
+                            <label for="slae-method">Метод решения:</label>
+                            <select id="slae-method">
+                                <option value="gaussian">Метод Гаусса</option>
+                                <option value="simple_iteration">Метод простой итерации</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Точность -->
+                        <div class="form-group">
+                            <label for="epsilon">Точность (ε):</label>
+                            <input type="number" id="epsilon" value="0.01" step="0.001" min="0.0001">
+                        </div>
+                        
+                        <!-- Кнопка решения -->
+                        <button id="solve-btn" class="btn-primary">Решить систему</button>
+                        
+                        <!-- Результаты -->
+                        <div id="slae-results" class="slae-results" style="display: none;">
+                            <h3>Результаты:</h3>
+                            
+                            <div class="result-item">
+                                <h4>Исходная система:</h4>
+                                <div id="system-latex" class="latex-display"></div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <h4>Решение:</h4>
+                                <div id="solution-latex" class="latex-display"></div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <h4>Информация:</h4>
+                                <p>Метод: <span id="info-method"></span></p>
+                                <p>Точность: <span id="info-epsilon"></span></p>
+                                <p id="info-iterations" style="display: none;">Количество итераций: <span id="info-iterations-count"></span></p>
+                                <p>Невязка: <span id="info-residual"></span></p>
+                            </div>
+                            
+                            <div class="result-item">
+                                <h4>Этапы решения:</h4>
+                                <div id="steps-list" class="steps-list"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ошибка -->
+                        <div id="slae-error" class="error-box" style="display: none;">
+                            <p></p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Задание 2: Интерполяция -->
+                <section id="task-2" class="task-section">
+                    <div class="task-header">
+                        <h2>Задание 2: Интерполяция</h2>
+                        <p class="task-description">Раздел в разработке...</p>
+                    </div>
+                </section>
+                
+                <!-- Задание 3: Функции -->
+                <section id="task-3" class="task-section">
+                    <div class="task-header">
+                        <h2>Тест ввода: MatJax ввод</h2>
+                        
+                        <div class="latex-input-section">
+                            <label for="latex-input">Введите функцию в формате MatJax:</label>
+                            <textarea 
+                                id="latex-input" 
+                                placeholder="Например: \sin(x) + \frac{2}{3}"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                        
+                        <div class="preview-section">
+                            <h3>Превью формулы:</h3>
+                            <div id="formula-preview" class="formula-preview">
+                                <p class="placeholder">Формула появится здесь</p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section>
             </div>
-        </div>
-        
-        <div class="preview-section">
-            <h3>Превью формулы:</h3>
-            <div id="formula-preview" class="formula-preview">
-                <p class="placeholder">Формула появится здесь</p>
-            </div>
-        </div>
-        
-        <div class="result-section">
-            <h3>Распаршеный результат:</h3>
-            <div id="parsed-result" class="result-box">
-                <p class="placeholder">Результат парсирования появится здесь</p>
-            </div>
-            
-            <div id="error-message" class="error-box" style="display: none;">
-                <p></p>
-            </div>
-        </div>
-        
+        </main>
     </div>
     
     <script>
-        const latexInput = document.getElementById('latex-input');
-        const formulaPreview = document.getElementById('formula-preview');
-        const parsedResult = document.getElementById('parsed-result');
-        const errorDiv = document.getElementById('error-message');
-        
-        // CSRF token
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value 
             || getCookie('csrftoken');
         
@@ -70,7 +178,200 @@
             return cookieValue;
         }
         
-        // Live preview при вводе
+        // ===== Переключение задач =====
+        document.querySelectorAll('.task-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.task-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.querySelectorAll('.task-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                e.currentTarget.classList.add('active');
+                const taskId = e.currentTarget.dataset.task;
+                document.getElementById(taskId).classList.add('active');
+            });
+        });
+        
+        // ===== СЛАУ Решатель (только LaTeX ввод) =====
+        const matrixAInput = document.getElementById('matrix-latex-a');
+        const vectorBInput = document.getElementById('vector-latex-b');
+        const matrixAPreview = document.getElementById('matrix-a-preview');
+        const vectorBPreview = document.getElementById('vector-b-preview');
+        
+        // LaTeX превью матрицы A
+        matrixAInput.addEventListener('input', async (e) => {
+            const latex = e.target.value;
+            
+            if (!latex.trim()) {
+                matrixAPreview.innerHTML = '<p class="placeholder">Превью матрицы A</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/parse-latex/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify({ latex: latex })
+                });
+                
+                const data = await response.json();
+                
+                if (data.valid) {
+                    matrixAPreview.innerHTML = `$$${latex}$$`;
+                    MathJax.typesetPromise([matrixAPreview]).catch(err => console.log(err));
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+        
+        // LaTeX превью вектора b
+        vectorBInput.addEventListener('input', async (e) => {
+            const latex = e.target.value;
+            
+            if (!latex.trim()) {
+                vectorBPreview.innerHTML = '<p class="placeholder">Превью вектора b</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/parse-latex/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify({ latex: latex })
+                });
+                
+                const data = await response.json();
+                
+                if (data.valid) {
+                    vectorBPreview.innerHTML = `$$${latex}$$`;
+                    MathJax.typesetPromise([vectorBPreview]).catch(err => console.log(err));
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+        
+        // Парсинг LaTeX матрицы в числовой вид
+        function parseMatrixFromLatex(latexStr) {
+            try {
+                // Извлекаем числа из LaTeX матрицы
+                const numbers = latexStr.match(/[\d.+-]+/g);
+                if (!numbers) throw new Error('Не найдены числа в матрице');
+                
+                // Считаем количество элементов в строке по '&'
+                const firstRowMatch = latexStr.match(/\\begin\{[^}]*\}([^\\]*?)\\\/);
+                const rowSize = (firstRowMatch ? firstRowMatch[1].match(/&/g) : []).length + 1;
+                
+                const matrix = [];
+                for (let i = 0; i < numbers.length; i += rowSize) {
+                    matrix.push(numbers.slice(i, i + rowSize).map(Number));
+                }
+                
+                return matrix;
+            } catch (error) {
+                throw new Error('Ошибка при парсинге матрицы: ' + error.message);
+            }
+        }
+        
+        function parseVectorFromLatex(latexStr) {
+            try {
+                const numbers = latexStr.match(/[\d.+-]+/g);
+                if (!numbers) throw new Error('Не найдены числа в векторе');
+                return numbers.map(Number);
+            } catch (error) {
+                throw new Error('Ошибка при парсинге вектора: ' + error.message);
+            }
+        }
+        
+        // Решение СЛАУ
+        document.getElementById('solve-btn').addEventListener('click', async () => {
+            const matrixLatex = matrixAInput.value.trim();
+            const vectorLatex = vectorBInput.value.trim();
+            const epsilon = parseFloat(document.getElementById('epsilon').value) || 0.01;
+            const method = document.getElementById('slae-method').value;
+            
+            if (!matrixLatex || !vectorLatex) {
+                document.getElementById('slae-error').querySelector('p').textContent = 
+                    'Пожалуйста, введите матрицу A и вектор b в LaTeX формате';
+                document.getElementById('slae-error').style.display = 'block';
+                return;
+            }
+            
+            try {
+                const A = parseMatrixFromLatex(matrixLatex);
+                const b = parseVectorFromLatex(vectorLatex);
+                
+                const response = await fetch('/api/solve-slae/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify({
+                        matrix_A: A,
+                        vector_b: b,
+                        epsilon: epsilon,
+                        method: method
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.valid) {
+                    document.getElementById('system-latex').innerHTML = `$$${data.matrix_latex}$$`;
+                    document.getElementById('solution-latex').innerHTML = `$$${data.solution_latex}$$`;
+                    document.getElementById('info-method').textContent = data.method;
+                    document.getElementById('info-epsilon').textContent = data.epsilon;
+                    document.getElementById('info-residual').textContent = data.residual.toExponential(2);
+                    
+                    if (data.num_iterations) {
+                        document.getElementById('info-iterations').style.display = 'block';
+                        document.getElementById('info-iterations-count').textContent = data.num_iterations;
+                    } else {
+                        document.getElementById('info-iterations').style.display = 'none';
+                    }
+                    
+                    const stepsList = document.getElementById('steps-list');
+                    stepsList.innerHTML = '';
+                    data.steps.forEach((step, idx) => {
+                        const div = document.createElement('div');
+                        div.className = 'step-item';
+                        div.textContent = `${idx + 1}. ${step}`;
+                        stepsList.appendChild(div);
+                    });
+                    
+                    document.getElementById('slae-results').style.display = 'block';
+                    document.getElementById('slae-error').style.display = 'none';
+                    
+                    MathJax.typesetPromise([document.getElementById('slae-results')])
+                        .catch(err => console.log(err));
+                } else {
+                    document.getElementById('slae-error').querySelector('p').textContent = data.error;
+                    document.getElementById('slae-error').style.display = 'block';
+                    document.getElementById('slae-results').style.display = 'none';
+                }
+            } catch (error) {
+                document.getElementById('slae-error').querySelector('p').textContent = 
+                    'Ошибка: ' + error.message;
+                document.getElementById('slae-error').style.display = 'block';
+            }
+        });
+        
+        // ===== LaTeX парсер (Задание 3) =====
+        const latexInput = document.getElementById('latex-input');
+        const formulaPreview = document.getElementById('formula-preview');
+        const parsedResult = document.getElementById('parsed-result');
+        const errorDiv = document.getElementById('error-message');
+        
         latexInput.addEventListener('input', async (e) => {
             const latex = e.target.value;
             
@@ -94,39 +395,20 @@
                 const data = await response.json();
                 
                 if (data.valid) {
-                    // Показываем preview с MathJax
                     formulaPreview.innerHTML = `$$${latex}$$`;
-                    
-                    // Показываем распаршеный результат
                     parsedResult.innerHTML = `<p><strong>Результат:</strong> <code>${data.parsed}</code></p>`;
-                    
                     errorDiv.style.display = 'none';
-                    
-                    // Перерендериваем MathJax
                     MathJax.typesetPromise([formulaPreview]).catch(err => console.log(err));
                 } else {
                     errorDiv.querySelector('p').textContent = data.error;
                     errorDiv.style.display = 'block';
                     formulaPreview.innerHTML = '<p class="placeholder">Ошибка в формуле</p>';
-                    parsedResult.innerHTML = '<p class="placeholder">Ошибка при парсировании</p>';
                 }
             } catch (error) {
                 errorDiv.querySelector('p').textContent = 'Ошибка сервера: ' + error.message;
                 errorDiv.style.display = 'block';
             }
         });
-        
-        // Загрузка справки
-        fetch('/api/latex-help/')
-            .then(r => r.json())
-            .then(data => {
-                const list = document.getElementById('commands-list');
-                data.commands.forEach(cmd => {
-                    const li = document.createElement('li');
-                    li.textContent = cmd;
-                    list.appendChild(li);
-                });
-            });
     </script>
 </body>
 </html>
