@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Калькулятор численных методов</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand__badge">NM</div>
+        <div>
+          <h1>Численные методы</h1>
+          <p>11 модулей для твоих заданий</p>
+        </div>
+      </div>
+
+      <nav class="task-nav" id="taskNav" aria-label="Выбор задания"></nav>
+
+      <div class="sidebar__note">
+        <p>Нажимай на задание слева, чтобы открыть отдельный модуль.</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="content__header">
+        <div>
+          <span class="eyebrow">Графическая оболочка</span>
+          <h2 id="taskTitle">Загрузка...</h2>
+        </div>
+        <div class="server-badge" id="serverStatus">API</div>
+      </header>
+
+      <section class="card">
+        <h3>Описание задания</h3>
+        <p id="taskDescription">Загрузка данных с сервера...</p>
+      </section>
+
+      <section class="card card--split">
+        <div>
+          <h3>Как это работает</h3>
+          <ul>
+            <li>Фронтенд получает список заданий из Go-сервера.</li>
+            <li>При клике по пункту меняется выбранный модуль.</li>
+            <li>Ты можешь дописывать логику для каждого задания отдельно.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Текущий модуль</h3>
+          <pre id="taskMeta">Загрузка...</pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
