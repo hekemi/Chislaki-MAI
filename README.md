@@ -12,7 +12,7 @@ cd Chislaki-MAI
 go run ./cmd/server
 ```
 
-После запуска в браузере открой:
+После запуска в браузере открываем
 
 http://localhost:8080
 
@@ -25,7 +25,7 @@ docker build -t chislaki-mai https://github.com/hekemi/Chislaki-MAI.git#govers
 docker run --rm -p 8080:8080 chislaki-mai
 ```
 
-После запуска в браузере открой:
+После запуска в браузере открываем
 
 http://localhost:8080
 
