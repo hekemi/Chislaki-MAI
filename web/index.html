@@ -10,47 +10,652 @@
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand__badge">NM</div>
         <div>
           <h1>Численные методы</h1>
-          <p>11 модулей для твоих заданий</p>
         </div>
       </div>
 
       <nav class="task-nav" id="taskNav" aria-label="Выбор задания"></nav>
 
-      <div class="sidebar__note">
-        <p>Нажимай на задание слева, чтобы открыть отдельный модуль.</p>
-      </div>
     </aside>
 
     <main class="content">
       <header class="content__header">
         <div>
-          <span class="eyebrow">Графическая оболочка</span>
           <h2 id="taskTitle">Загрузка...</h2>
         </div>
-        <div class="server-badge" id="serverStatus">API</div>
       </header>
 
-      <section class="card">
-        <h3>Описание задания</h3>
-        <p id="taskDescription">Загрузка данных с сервера...</p>
+      <section class="card task1-panel" id="task1Panel">
+        <div class="section-header">
+          <div>
+            <h3>Решение СЛАУ методом Гаусса и методом простой итерации</h3>
+            <p class="section-lead">
+              Ниже есть готовый вариант 13 и отдельный раздел для произвольной квадратной СЛАУ.
+            </p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13</h4>
+              <p class="subcard__note">Система подставляется автоматически для быстрого расчета.</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPresetButton" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePresetButton" type="button">Рассчитать</button>
+              <button class="action-button" id="showGraphButton" type="button">К графику</button>
+            </div>
+          </div>
+          <pre id="presetSystemView" class="equation-view equation-view--large"></pre>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard">
+            <h4>Метод Гаусса</h4>
+            <div id="gaussianResult" class="result-box"></div>
+          </section>
+
+          <section class="subcard">
+            <h4>Метод простой итерации</h4>
+            <div id="iterativeResult" class="result-box"></div>
+          </section>
+        </div>
+
+        <section class="subcard" id="gaussianStepsSection">
+          <h4>Пошаговое преобразование матрицы Гаусса</h4>
+          <div id="gaussianStepsWrap" class="steps-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>Таблица итераций (исходная система)</h4>
+          <div id="iterationTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard" id="graphSection">
+          <h4>График сходимости (исходная система)</h4>
+          <div id="iterationChartWrap" class="chart-wrap"></div>
+        </section>
+
+        <section class="subcard custom-slau-section">
+          <h4>Произвольная СЛАУ</h4>
+          <p class="subcard__note">Можно менять размерность матрицы и вводить свои коэффициенты.</p>
+
+          <div class="inline-controls">
+            <label class="field-label">
+              Размерность
+              <input id="systemSizeInput" type="number" min="2" max="10" value="3" />
+            </label>
+            <button class="action-button" id="buildMatrixButton" type="button">Построить форму</button>
+          </div>
+
+          <form id="customSystemForm" class="system-form">
+            <div id="matrixEditor" class="matrix-editor"></div>
+
+            <div class="inline-controls inline-controls--stacked">
+              <label class="field-label">
+                Точность ε
+                <input id="epsilonInput" type="number" step="0.001" value="0.01" />
+              </label>
+              <label class="field-label">
+                Максимум итераций
+                <input id="maxIterationsInput" type="number" min="1" value="100" />
+              </label>
+            </div>
+
+            <button class="action-button action-button--primary" type="submit">Решить произвольную СЛАУ</button>
+          </form>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard">
+            <h4>Метод Гаусса (произвольная СЛАУ)</h4>
+            <div id="gaussianCustomResult" class="result-box"></div>
+          </section>
+
+          <section class="subcard">
+            <h4>Метод простой итерации (произвольная СЛАУ)</h4>
+            <div id="iterativeCustomResult" class="result-box"></div>
+          </section>
+        </div>
+
+        <section class="subcard" id="gaussianCustomStepsSection">
+          <h4>Пошаговое преобразование матрицы Гаусса (произвольная СЛАУ)</h4>
+          <div id="gaussianCustomStepsWrap" class="steps-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>Таблица итераций (произвольная СЛАУ)</h4>
+          <div id="iterationCustomTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>График сходимости (произвольная СЛАУ)</h4>
+          <div id="iterationCustomChartWrap" class="chart-wrap"></div>
+        </section>
       </section>
 
-      <section class="card card--split">
-        <div>
-          <h3>Как это работает</h3>
-          <ul>
-            <li>Фронтенд получает список заданий из Go-сервера.</li>
-            <li>При клике по пункту меняется выбранный модуль.</li>
-            <li>Ты можешь дописывать логику для каждого задания отдельно.</li>
-          </ul>
+      <section class="card hidden" id="task10Panel">
+        <div class="section-header">
+          <div>
+            <h3>Метод Рунге-Кутты и Адамса</h3>
+            <p class="section-lead">Решение задачи Коши методом Рунге-Кутты 4-го порядка и методом Адамса</p>
+          </div>
         </div>
-        <div>
-          <h3>Текущий модуль</h3>
-          <pre id="taskMeta">Загрузка...</pre>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13</h4>
+              <p class="subcard__note">Введите f(x,y), начальное условие y(a)=y0, отрезок и шаг h</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset10Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset10Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label">y' = f(x,y) <input id="equation10Input" type="text" value="1 + 0.8*y*sin(x) - 2*y*y" /></label>
+            <label class="field-label">a <input id="a10Input" type="number" step="0.0001" value="0" /></label>
+            <label class="field-label">b <input id="b10Input" type="number" step="0.0001" value="1" /></label>
+            <label class="field-label">y(a) <input id="y0Input" type="number" step="0.0001" value="0" /></label>
+            <label class="field-label">h <input id="h10Input" type="number" step="0.001" value="0.1" /></label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Решение по Рунге-Кутту</h4><div id="rk4Result" class="result-box"></div></section>
+          <section class="subcard"><h4>Решение по Адамсу</h4><div id="adamsResult" class="result-box"></div></section>
         </div>
+
+        <section class="subcard"><h4>Таблица метода Рунге-Кутты</h4><div id="rk4TableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График метода Рунге-Кутты</h4><div id="rk4ChartWrap" class="chart-wrap"></div></section>
+
+        <section class="subcard"><h4>Таблица метода Адамса</h4><div id="adamsTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График метода Адамса</h4><div id="adamsChartWrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task11Panel">
+        <div class="section-header">
+          <div>
+            <h3>Краевая задача</h3>
+            <p class="section-lead">Метод прогонки, аппроксимация O(h²), таблица коэффициентов и график решения</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: общий вид уравнения</h4>
+              <p class="subcard__note">y'' + p(x)y' + q(x)y = f(x), границы: α1 y(a)+β1 y'(a)=γ1 и α2 y(b)+β2 y'(b)=γ2</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset11Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset11Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <div class="inline-controls inline-controls--stacked">
+            <label class="field-label">p(x) <input id="p11Input" type="text" value="2/x" /></label>
+            <label class="field-label">q(x) <input id="q11Input" type="text" value="-3" /></label>
+            <label class="field-label">f(x) <input id="rhs11Input" type="text" value="2" /></label>
+          </div>
+
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">a <input id="a11Input" type="number" step="0.0001" value="0.8" /></label>
+            <label class="field-label">b <input id="b11Input" type="number" step="0.0001" value="1.1" /></label>
+            <label class="field-label">h <input id="h11Input" type="number" step="0.0001" value="0.1" /></label>
+          </div>
+
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">α1 <input id="leftAlpha11Input" type="number" step="0.0001" value="0" /></label>
+            <label class="field-label">β1 <input id="leftBeta11Input" type="number" step="0.0001" value="1" /></label>
+            <label class="field-label">γ1 <input id="leftGamma11Input" type="number" step="0.0001" value="1.5" /></label>
+          </div>
+
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">α2 <input id="rightAlpha11Input" type="number" step="0.0001" value="2" /></label>
+            <label class="field-label">β2 <input id="rightBeta11Input" type="number" step="0.0001" value="1" /></label>
+            <label class="field-label">γ2 <input id="rightGamma11Input" type="number" step="0.0001" value="3" /></label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Результат</h4><div id="task11Result" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица прогонки (итерации)</h4><div id="task11TableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График y(x)</h4><div id="task11ChartWrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task9Panel">
+        <div class="section-header">
+          <div>
+            <h3>Численное интегрирование</h3>
+            <p class="section-lead">Метод Симпсона – таблица шагов и график сходимости</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: интеграл</h4>
+              <p class="subcard__note">Введите функцию f(x), нижний и верхний пределы и точность ε</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset9Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset9Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label">f(x) <input id="equation9Input" type="text" value="cos(x^2)/(x+1)" /></label>
+            <label class="field-label">a <input id="a9Input" type="number" step="0.0001" value="0" /></label>
+            <label class="field-label">b <input id="b9Input" type="number" step="0.0001" value="1" /></label>
+            <label class="field-label">ε <input id="eps9Input" type="number" step="1e-6" value="1e-4" /></label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Результат</h4><div id="integralResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица итераций</h4><div id="iterationTable9Wrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График сходимости</h4><div id="iterationChart9Wrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task8Panel">
+        <div class="section-header">
+          <div>
+            <h3>Производные</h3>
+            <p class="section-lead">Найти значения первой и второй производных в указанных точках, используя таблицу (можно редактировать)</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: таблица (CSV)</h4>
+              <p class="subcard__note">Каждая строка: xi, yi – можно редактировать и пересчитать</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset8Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset8Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <textarea id="nodesCsv8Input" rows="8" style="width:100%;">0,1.0
+0.12,1.2
+0.19,1.6
+0.35,2.6
+0.4,1.8
+0.45,2.7
+0.62,3.5
+0.71,4.4
+0.84,4.5
+0.91,5.2
+1.0,6.3</textarea>
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">x1 <input id="x1Input" type="number" step="0.0001" value="0.35" /></label>
+            <label class="field-label">x2 <input id="x2Input" type="number" step="0.0001" value="1.0" /></label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Значения производных</h4><div id="derivativesResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица узлов (редактируемая)</h4><div id="nodesTable8Wrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График</h4><div id="derivativesChartWrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task5Panel">
+        <div class="section-header">
+          <div>
+            <h3>Интерполяция</h3>
+            <p class="section-lead">Построить многочлены Лагранжа и Ньютона, оценить погрешность в заданной точке</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13</h4>
+              <p class="subcard__note">Набор узлов вводится как CSV: каждая строка "xi, yi"</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset5Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset5Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <pre id="presetSystem5View" class="equation-view equation-view--large">Узлы: см. пример; x* = 1.3862</pre>
+        </section>
+
+        <section class="subcard">
+          <h4>Исходное задание из варианта 13: ввод узлов (CSV)</h4>
+          <textarea id="nodesCsvInput" rows="6" style="width:100%;">1.375,5.04192
+1.379,5.17744
+1.383,5.32016
+1.387,5.47069
+1.391,5.62968
+1.395,5.79788</textarea>
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">x* <input id="xStarInput" type="number" step="0.0001" value="1.3862" /></label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Лагранж</h4><div id="lagrangeResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Ньютон</h4><div id="newtonResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица узлов</h4><div id="nodesTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График интерполяции</h4><div id="interpolationChartWrap" class="chart-wrap"></div></section>
+
+      </section>
+
+      <section class="card hidden" id="task6Panel">
+        <div class="section-header">
+          <div>
+            <h3>Кубические сплайны</h3>
+            <p class="section-lead">Натуральный кубический сплайн с условием дефекта 1 на концах</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: узлы</h4>
+              <p class="subcard__note">CSV: каждая строка содержит xi и yi</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset6Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset6Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <pre id="presetSystem6View" class="equation-view equation-view--large">Сплайн по узлам задания 5</pre>
+        </section>
+
+        <section class="subcard">
+          <h4>Ввод узлов</h4>
+          <textarea id="nodesCsv6Input" rows="6" style="width:100%;">1.375,5.04192
+1.379,5.17744
+1.383,5.32016
+1.387,5.47069
+1.391,5.62968
+1.395,5.79788</textarea>
+          <div class="inline-controls" style="margin-top:8px;">
+            <label class="field-label">x* <input id="xStar6Input" type="number" step="0.0001" value="1.3862" /></label>
+            <label class="field-label">S''(x1) <input id="boundaryLeftInput" type="number" step="0.000001" placeholder="пусто = натуральный" /></label>
+            <label class="field-label">S''(xn) <input id="boundaryRightInput" type="number" step="0.000001" placeholder="пусто = натуральный" /></label>
+            <label class="field-label" title="Вычислять S(x) во всех x из таблицы узлов">
+              <input id="useTable5Checkbox" type="checkbox" checked /> Вычислять S(x) во всех x из таблицы узлов
+            </label>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Значение сплайна</h4><div id="splineValueResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Граничные условия</h4><div id="splineBoundaryResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица узлов</h4><div id="nodesTable6Wrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>Таблица сплайнов</h4><div id="splineSegmentsTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График сплайна</h4><div id="splineChartWrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task7Panel">
+        <div class="section-header">
+          <div>
+            <h3>Метод наименьших квадратов</h3>
+            <p class="section-lead">Аппроксимация заданной таблицы линейным и квадратичным многочленом</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: таблица</h4>
+              <p class="subcard__note">Данные берутся из задания: xi и yi</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset7Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset7Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+
+          <pre id="presetSystem7View" class="equation-view equation-view--large"></pre>
+          <div style="margin-top:8px;">
+            <label class="field-label">Ввести свои узлы (каждая строка: x y или x,y):</label>
+            <textarea id="nodesCsv7Input" rows="8" style="width:100%; font-family: monospace;" placeholder="0.0,1.0\n0.12,1.2\n..."></textarea>
+          </div>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Линейная аппроксимация</h4><div id="linearResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Квадратичная аппроксимация</h4><div id="quadraticResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица сравнения</h4><div id="leastSquaresTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График аппроксимации</h4><div id="leastSquaresChartWrap" class="chart-wrap"></div></section>
+      </section>
+
+      <section class="card hidden" id="task2Panel">
+        <div class="section-header">
+          <div>
+            <h3>Решение СЛАУ методом прогонки и методом Зейделя</h3>
+            <p class="section-lead">
+              В этом модуле есть исходная система из задания 2 и отдельный раздел для произвольной квадратной СЛАУ.
+            </p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13</h4>
+              <p class="subcard__note">Система подставляется автоматически для быстрого расчета.</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset2Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset2Button" type="button">Рассчитать</button>
+              <button class="action-button" id="showGraph2Button" type="button">К графику</button>
+            </div>
+          </div>
+          <pre id="presetSystem2View" class="equation-view equation-view--large"></pre>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard">
+            <h4>Метод прогонки</h4>
+            <div id="sweepPresetResult" class="result-box"></div>
+          </section>
+
+          <section class="subcard">
+            <h4>Метод Зейделя</h4>
+            <div id="seidelPresetResult" class="result-box"></div>
+          </section>
+        </div>
+
+        <section class="subcard">
+          <h4>Таблица метода прогонки (исходная система)</h4>
+          <div id="sweepPresetIterationTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>График метода прогонки (исходная система)</h4>
+          <div id="sweepPresetIterationChartWrap" class="chart-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>Таблица итераций (исходная система)</h4>
+          <div id="seidelPresetIterationTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard" id="graph2PresetSection">
+          <h4>График сходимости (исходная система)</h4>
+          <div id="seidelPresetIterationChartWrap" class="chart-wrap"></div>
+        </section>
+
+        <section class="subcard custom-slau-section">
+          <h4>Произвольная СЛАУ</h4>
+          <p class="subcard__note">Здесь можно ввести любую квадратную СЛАУ и получить таблицу/график итераций метода Зейделя.</p>
+
+          <div class="inline-controls">
+            <label class="field-label">
+              Размерность
+              <input id="system2SizeInput" type="number" min="2" max="10" value="4" />
+            </label>
+            <button class="action-button" id="buildMatrix2Button" type="button">Построить форму</button>
+          </div>
+
+          <form id="customSystem2Form" class="system-form">
+            <div id="matrix2Editor" class="matrix-editor"></div>
+
+            <div class="inline-controls inline-controls--stacked">
+              <label class="field-label">
+                Точность ε
+                <input id="epsilon2Input" type="number" step="0.001" value="0.01" />
+              </label>
+              <label class="field-label">
+                Максимум итераций
+                <input id="maxIterations2Input" type="number" min="1" value="100" />
+              </label>
+            </div>
+
+            <button class="action-button action-button--primary" type="submit">Решить произвольную СЛАУ</button>
+          </form>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard">
+            <h4>Метод прогонки (произвольная СЛАУ)</h4>
+            <div id="sweepCustomResult" class="result-box"></div>
+          </section>
+
+          <section class="subcard">
+            <h4>Метод Зейделя (произвольная СЛАУ)</h4>
+            <div id="seidelCustomResult" class="result-box"></div>
+          </section>
+        </div>
+
+        <section class="subcard">
+          <h4>Таблица метода прогонки (произвольная СЛАУ)</h4>
+          <div id="sweepCustomIterationTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>График метода прогонки (произвольная СЛАУ)</h4>
+          <div id="sweepCustomIterationChartWrap" class="chart-wrap"></div>
+        </section>
+
+        <section class="subcard">
+          <h4>Таблица итераций (произвольная СЛАУ)</h4>
+          <div id="seidelCustomIterationTableWrap" class="table-wrap"></div>
+        </section>
+
+        <section class="subcard" id="graph2CustomSection">
+          <h4>График сходимости (произвольная СЛАУ)</h4>
+          <div id="seidelCustomIterationChartWrap" class="chart-wrap"></div>
+        </section>
+      </section>
+
+      <section class="card hidden" id="task3Panel">
+        <div class="section-header">
+          <div>
+            <h3>Задание 3</h3>
+            <p class="section-lead">Небольшой блок для ввода вашей информации и заметок.</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Ввод данных</h4>
+              <p class="subcard__note">Введите любой текст и нажмите «Сохранить», чтобы зафиксировать его в блоке результата.</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset3Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="saveTask3InfoButton" type="button">Сохранить</button>
+            </div>
+          </div>
+
+          <textarea id="task3InfoInput" rows="5" style="width:100%;" placeholder="Например: что нужно учесть в задании, свои данные, промежуточные результаты..."></textarea>
+        </section>
+
+        <section class="subcard">
+          <h4>Сохраненная информация</h4>
+          <div id="task3InfoResult" class="result-box"></div>
+        </section>
+      </section>
+
+      <section class="card hidden" id="task4Panel">
+        <div class="section-header">
+          <div>
+            <h3>Решение нелинейных уравнений</h3>
+            <p class="section-lead">Методы бисекции, простой итерации и Ньютона</p>
+          </div>
+        </div>
+
+        <section class="subcard subcard--source">
+          <div class="subcard__header">
+            <div>
+              <h4>Исходное задание из варианта 13: 3x - e^x = 0</h4>
+              <p class="subcard__note">На отрезке [0, 1]</p>
+            </div>
+            <div class="panel-actions panel-actions--compact">
+              <button class="action-button" id="fillPreset4Button" type="button">Заполнить</button>
+              <button class="action-button action-button--primary" id="solvePreset4Button" type="button">Рассчитать</button>
+            </div>
+          </div>
+          <pre id="presetSystem4View" class="equation-view equation-view--large">3*x - exp(x) = 0 на [0, 1]</pre>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Бисекция</h4><div id="bisectionPresetResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Простая итерация</h4><div id="simpleIterationPresetResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Ньютон</h4><div id="newtonPresetResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица (бисекция)</h4><div id="bisectionPresetIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (бисекция)</h4><div id="bisectionPresetIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (простая итерация)</h4><div id="simpleIterationPresetIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (простая итерация)</h4><div id="simpleIterationPresetIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (Ньютон)</h4><div id="newtonPresetIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (Ньютон)</h4><div id="newtonPresetIterationChartWrap" class="chart-wrap"></div></section>
+
+        <section class="subcard custom-slau-section">
+          <h4>Произвольное уравнение</h4>
+          <p class="subcard__note">Примеры: 3*x - exp(x); sin(x) - x/2; x*x - 2</p>
+          <form id="customEquation4Form" class="system-form">
+            <div class="inline-controls inline-controls--stacked">
+              <label class="field-label">Уравнение <input id="equationInput" type="text" value="3*x - exp(x)" /></label>
+              <label class="field-label">a <input id="equation4AInput" type="number" value="0" /></label>
+              <label class="field-label">b <input id="equation4BInput" type="number" value="1" /></label>
+              <label class="field-label">x0 <input id="equation4X0Input" type="number" value="1" /></label>
+              <label class="field-label">ε <input id="equation4EpsilonInput" type="number" step="0.0001" value="0.0001" /></label>
+              <label class="field-label">Макс итераций <input id="equation4MaxIterationsInput" type="number" value="100" /></label>
+            </div>
+            <button class="action-button action-button--primary" type="submit">Решить уравнение</button>
+          </form>
+        </section>
+
+        <div class="results-grid">
+          <section class="subcard"><h4>Бисекция (произвольное)</h4><div id="bisectionCustomResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Простая итерация (произвольное)</h4><div id="simpleIterationCustomResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Ньютон (произвольное)</h4><div id="newtonCustomResult" class="result-box"></div></section>
+        </div>
+
+        <section class="subcard"><h4>Таблица (бисекция, произвольное)</h4><div id="bisectionCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (бисекция, произвольное)</h4><div id="bisectionCustomIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (простая итерация, произвольное)</h4><div id="simpleIterationCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (простая итерация, произвольное)</h4><div id="simpleIterationCustomIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (Ньютон, произвольное)</h4><div id="newtonCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (Ньютон, произвольное)</h4><div id="newtonCustomIterationChartWrap" class="chart-wrap"></div></section>
       </section>
     </main>
   </div>

@@ -1,8 +1,8 @@
 package tasks
 
 import (
-	"sort"
 	"chislennie-metodi/internal/taskmeta"
+	"sort"
 
 	"chislennie-metodi/internal/tasks/task01"
 	"chislennie-metodi/internal/tasks/task02"

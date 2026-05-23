@@ -7,7 +7,7 @@ func Meta() taskmeta.Meta {
 	return taskmeta.Meta{
 		ID:          2,
 		Title:       "Задание 2",
-		Description: "Заготовка для второго модуля численных методов.",
-		Status:      "placeholder",
+		Description: "Решить СЛАУ методом прогонки и методом Зейделя",
+		Status:      "ready",
 	}
 }

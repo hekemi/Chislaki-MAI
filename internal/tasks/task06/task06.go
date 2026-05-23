@@ -7,7 +7,7 @@ func Meta() taskmeta.Meta {
 	return taskmeta.Meta{
 		ID:          6,
 		Title:       "Задание 6",
-		Description: "Заготовка для шестого модуля численных методов.",
-		Status:      "placeholder",
+		Description: "Построение натурального кубического сплайна и таблицы коэффициентов.",
+		Status:      "ready",
 	}
 }

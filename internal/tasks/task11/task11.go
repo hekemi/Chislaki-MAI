@@ -7,7 +7,7 @@ func Meta() taskmeta.Meta {
 	return taskmeta.Meta{
 		ID:          11,
 		Title:       "Задание 11",
-		Description: "Заготовка для одиннадцатого модуля численных методов.",
-		Status:      "placeholder",
+		Description: "Краевая задача для ОДУ 2-го порядка: метод прогонки, O(h^2).",
+		Status:      "ready",
 	}
 }

@@ -7,7 +7,7 @@ func Meta() taskmeta.Meta {
 	return taskmeta.Meta{
 		ID:          7,
 		Title:       "Задание 7",
-		Description: "Заготовка для седьмого модуля численных методов.",
-		Status:      "placeholder",
+		Description: "Аппроксимация линейным и квадратичным многочленом по заданной таблице.",
+		Status:      "ready",
 	}
 }
