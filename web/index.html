@@ -30,17 +30,15 @@
         <div class="section-header">
           <div>
             <h3>Решение СЛАУ методом Гаусса и методом простой итерации</h3>
-            <p class="section-lead">
-              Ниже есть готовый вариант 13 и отдельный раздел для произвольной квадратной СЛАУ.
-            </p>
+            <p class="section-lead">Исходная СЛАУ уже подставлена в форму, но все коэффициенты можно менять.</p>
           </div>
         </div>
 
-        <section class="subcard subcard--source">
+        <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
               <h4>Исходное задание из варианта 13</h4>
-              <p class="subcard__note">Система подставляется автоматически для быстрого расчета.</p>
+              <p class="subcard__note">Система подставляется кнопкой «Заполнить», но любые данные можно изменить вручную.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
               <button class="action-button" id="fillPresetButton" type="button">Заполнить</button>
@@ -48,39 +46,6 @@
               <button class="action-button" id="showGraphButton" type="button">К графику</button>
             </div>
           </div>
-          <pre id="presetSystemView" class="equation-view equation-view--large"></pre>
-        </section>
-
-        <div class="results-grid">
-          <section class="subcard">
-            <h4>Метод Гаусса</h4>
-            <div id="gaussianResult" class="result-box"></div>
-          </section>
-
-          <section class="subcard">
-            <h4>Метод простой итерации</h4>
-            <div id="iterativeResult" class="result-box"></div>
-          </section>
-        </div>
-
-        <section class="subcard" id="gaussianStepsSection">
-          <h4>Пошаговое преобразование матрицы Гаусса</h4>
-          <div id="gaussianStepsWrap" class="steps-wrap"></div>
-        </section>
-
-        <section class="subcard">
-          <h4>Таблица итераций (исходная система)</h4>
-          <div id="iterationTableWrap" class="table-wrap"></div>
-        </section>
-
-        <section class="subcard" id="graphSection">
-          <h4>График сходимости (исходная система)</h4>
-          <div id="iterationChartWrap" class="chart-wrap"></div>
-        </section>
-
-        <section class="subcard custom-slau-section">
-          <h4>Произвольная СЛАУ</h4>
-          <p class="subcard__note">Можно менять размерность матрицы и вводить свои коэффициенты.</p>
 
           <div class="inline-controls">
             <label class="field-label">
@@ -104,35 +69,35 @@
               </label>
             </div>
 
-            <button class="action-button action-button--primary" type="submit">Решить произвольную СЛАУ</button>
+            
           </form>
         </section>
 
         <div class="results-grid">
           <section class="subcard">
-            <h4>Метод Гаусса (произвольная СЛАУ)</h4>
-            <div id="gaussianCustomResult" class="result-box"></div>
+            <h4>Метод Гаусса</h4>
+            <div id="gaussianResult" class="result-box"></div>
           </section>
 
           <section class="subcard">
-            <h4>Метод простой итерации (произвольная СЛАУ)</h4>
-            <div id="iterativeCustomResult" class="result-box"></div>
+            <h4>Метод простой итерации</h4>
+            <div id="iterativeResult" class="result-box"></div>
           </section>
         </div>
 
-        <section class="subcard" id="gaussianCustomStepsSection">
-          <h4>Пошаговое преобразование матрицы Гаусса (произвольная СЛАУ)</h4>
-          <div id="gaussianCustomStepsWrap" class="steps-wrap"></div>
+        <section class="subcard" id="gaussianStepsSection">
+          <h4>Пошаговое преобразование матрицы Гаусса</h4>
+          <div id="gaussianStepsWrap" class="steps-wrap"></div>
         </section>
 
         <section class="subcard">
-          <h4>Таблица итераций (произвольная СЛАУ)</h4>
-          <div id="iterationCustomTableWrap" class="table-wrap"></div>
+          <h4>Таблица итераций</h4>
+          <div id="iterationTableWrap" class="table-wrap"></div>
         </section>
 
-        <section class="subcard">
-          <h4>График сходимости (произвольная СЛАУ)</h4>
-          <div id="iterationCustomChartWrap" class="chart-wrap"></div>
+        <section class="subcard" id="graphSection">
+          <h4>График сходимости</h4>
+          <div id="iterationChartWrap" class="chart-wrap"></div>
         </section>
       </section>
 
@@ -335,7 +300,7 @@
         </section>
 
         <section class="subcard">
-          <h4>Исходное задание из варианта 13: ввод узлов (CSV)</h4>
+          <h4>Ввод узлов (CSV)</h4>
           <textarea id="nodesCsvInput" rows="6" style="width:100%;">1.375,5.04192
 1.379,5.17744
 1.383,5.32016
@@ -448,17 +413,15 @@
         <div class="section-header">
           <div>
             <h3>Решение СЛАУ методом прогонки и методом Зейделя</h3>
-            <p class="section-lead">
-              В этом модуле есть исходная система из задания 2 и отдельный раздел для произвольной квадратной СЛАУ.
-            </p>
+            <p class="section-lead">Исходная СЛАУ уже подставлена в форму, но все коэффициенты можно менять.</p>
           </div>
         </div>
 
-        <section class="subcard subcard--source">
+        <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
               <h4>Исходное задание из варианта 13</h4>
-              <p class="subcard__note">Система подставляется автоматически для быстрого расчета.</p>
+              <p class="subcard__note">Система подставляется кнопкой «Заполнить», но любые данные можно изменить вручную.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
               <button class="action-button" id="fillPreset2Button" type="button">Заполнить</button>
@@ -466,44 +429,6 @@
               <button class="action-button" id="showGraph2Button" type="button">К графику</button>
             </div>
           </div>
-          <pre id="presetSystem2View" class="equation-view equation-view--large"></pre>
-        </section>
-
-        <div class="results-grid">
-          <section class="subcard">
-            <h4>Метод прогонки</h4>
-            <div id="sweepPresetResult" class="result-box"></div>
-          </section>
-
-          <section class="subcard">
-            <h4>Метод Зейделя</h4>
-            <div id="seidelPresetResult" class="result-box"></div>
-          </section>
-        </div>
-
-        <section class="subcard">
-          <h4>Таблица метода прогонки (исходная система)</h4>
-          <div id="sweepPresetIterationTableWrap" class="table-wrap"></div>
-        </section>
-
-        <section class="subcard">
-          <h4>График метода прогонки (исходная система)</h4>
-          <div id="sweepPresetIterationChartWrap" class="chart-wrap"></div>
-        </section>
-
-        <section class="subcard">
-          <h4>Таблица итераций (исходная система)</h4>
-          <div id="seidelPresetIterationTableWrap" class="table-wrap"></div>
-        </section>
-
-        <section class="subcard" id="graph2PresetSection">
-          <h4>График сходимости (исходная система)</h4>
-          <div id="seidelPresetIterationChartWrap" class="chart-wrap"></div>
-        </section>
-
-        <section class="subcard custom-slau-section">
-          <h4>Произвольная СЛАУ</h4>
-          <p class="subcard__note">Здесь можно ввести любую квадратную СЛАУ и получить таблицу/график итераций метода Зейделя.</p>
 
           <div class="inline-controls">
             <label class="field-label">
@@ -527,39 +452,39 @@
               </label>
             </div>
 
-            <button class="action-button action-button--primary" type="submit">Решить произвольную СЛАУ</button>
+            
           </form>
         </section>
 
         <div class="results-grid">
           <section class="subcard">
-            <h4>Метод прогонки (произвольная СЛАУ)</h4>
+            <h4>Метод прогонки</h4>
             <div id="sweepCustomResult" class="result-box"></div>
           </section>
 
           <section class="subcard">
-            <h4>Метод Зейделя (произвольная СЛАУ)</h4>
+            <h4>Метод Зейделя</h4>
             <div id="seidelCustomResult" class="result-box"></div>
           </section>
         </div>
 
         <section class="subcard">
-          <h4>Таблица метода прогонки (произвольная СЛАУ)</h4>
+          <h4>Таблица метода прогонки</h4>
           <div id="sweepCustomIterationTableWrap" class="table-wrap"></div>
         </section>
 
         <section class="subcard">
-          <h4>График метода прогонки (произвольная СЛАУ)</h4>
+          <h4>График метода прогонки</h4>
           <div id="sweepCustomIterationChartWrap" class="chart-wrap"></div>
         </section>
 
         <section class="subcard">
-          <h4>Таблица итераций (произвольная СЛАУ)</h4>
+          <h4>Таблица итераций</h4>
           <div id="seidelCustomIterationTableWrap" class="table-wrap"></div>
         </section>
 
         <section class="subcard" id="graph2CustomSection">
-          <h4>График сходимости (произвольная СЛАУ)</h4>
+          <h4>График сходимости</h4>
           <div id="seidelCustomIterationChartWrap" class="chart-wrap"></div>
         </section>
       </section>
@@ -577,40 +502,22 @@
         <div class="section-header">
           <div>
             <h3>Решение нелинейных уравнений</h3>
-            <p class="section-lead">Методы бисекции, простой итерации и Ньютона</p>
+            <p class="section-lead">Исходное уравнение уже подставлено в форму, но его можно изменить в любой момент.</p>
           </div>
         </div>
 
-        <section class="subcard subcard--source">
+        <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
               <h4>Исходное задание из варианта 13: 3x - e^x = 0</h4>
-              <p class="subcard__note">На отрезке [0, 1]</p>
+              <p class="subcard__note">На отрезке [0, 1]. Нажми «Заполнить», если нужно вернуть исходный пример.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
               <button class="action-button" id="fillPreset4Button" type="button">Заполнить</button>
               <button class="action-button action-button--primary" id="solvePreset4Button" type="button">Рассчитать</button>
             </div>
           </div>
-          <pre id="presetSystem4View" class="equation-view equation-view--large">3*x - exp(x) = 0 на [0, 1]</pre>
-        </section>
 
-        <div class="results-grid">
-          <section class="subcard"><h4>Бисекция</h4><div id="bisectionPresetResult" class="result-box"></div></section>
-          <section class="subcard"><h4>Простая итерация</h4><div id="simpleIterationPresetResult" class="result-box"></div></section>
-          <section class="subcard"><h4>Ньютон</h4><div id="newtonPresetResult" class="result-box"></div></section>
-        </div>
-
-        <section class="subcard"><h4>Таблица (бисекция)</h4><div id="bisectionPresetIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (бисекция)</h4><div id="bisectionPresetIterationChartWrap" class="chart-wrap"></div></section>
-        <section class="subcard"><h4>Таблица (простая итерация)</h4><div id="simpleIterationPresetIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (простая итерация)</h4><div id="simpleIterationPresetIterationChartWrap" class="chart-wrap"></div></section>
-        <section class="subcard"><h4>Таблица (Ньютон)</h4><div id="newtonPresetIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (Ньютон)</h4><div id="newtonPresetIterationChartWrap" class="chart-wrap"></div></section>
-
-        <section class="subcard custom-slau-section">
-          <h4>Произвольное уравнение</h4>
-          <p class="subcard__note">Примеры: 3*x - exp(x); sin(x) - x/2; x*x - 2</p>
           <form id="customEquation4Form" class="system-form">
             <div class="inline-controls inline-controls--stacked">
               <label class="field-label">Уравнение <input id="equationInput" type="text" value="3*x - exp(x)" /></label>
@@ -620,22 +527,22 @@
               <label class="field-label">ε <input id="equation4EpsilonInput" type="number" step="0.0001" value="0.0001" /></label>
               <label class="field-label">Макс итераций <input id="equation4MaxIterationsInput" type="number" value="100" /></label>
             </div>
-            <button class="action-button action-button--primary" type="submit">Решить уравнение</button>
+            
           </form>
         </section>
 
         <div class="results-grid">
-          <section class="subcard"><h4>Бисекция (произвольное)</h4><div id="bisectionCustomResult" class="result-box"></div></section>
-          <section class="subcard"><h4>Простая итерация (произвольное)</h4><div id="simpleIterationCustomResult" class="result-box"></div></section>
-          <section class="subcard"><h4>Ньютон (произвольное)</h4><div id="newtonCustomResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Бисекция</h4><div id="bisectionCustomResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Простая итерация</h4><div id="simpleIterationCustomResult" class="result-box"></div></section>
+          <section class="subcard"><h4>Ньютон</h4><div id="newtonCustomResult" class="result-box"></div></section>
         </div>
 
-        <section class="subcard"><h4>Таблица (бисекция, произвольное)</h4><div id="bisectionCustomIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (бисекция, произвольное)</h4><div id="bisectionCustomIterationChartWrap" class="chart-wrap"></div></section>
-        <section class="subcard"><h4>Таблица (простая итерация, произвольное)</h4><div id="simpleIterationCustomIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (простая итерация, произвольное)</h4><div id="simpleIterationCustomIterationChartWrap" class="chart-wrap"></div></section>
-        <section class="subcard"><h4>Таблица (Ньютон, произвольное)</h4><div id="newtonCustomIterationTableWrap" class="table-wrap"></div></section>
-        <section class="subcard"><h4>График (Ньютон, произвольное)</h4><div id="newtonCustomIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (бисекция)</h4><div id="bisectionCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (бисекция)</h4><div id="bisectionCustomIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (простая итерация)</h4><div id="simpleIterationCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (простая итерация)</h4><div id="simpleIterationCustomIterationChartWrap" class="chart-wrap"></div></section>
+        <section class="subcard"><h4>Таблица (Ньютон)</h4><div id="newtonCustomIterationTableWrap" class="table-wrap"></div></section>
+        <section class="subcard"><h4>График (Ньютон)</h4><div id="newtonCustomIterationChartWrap" class="chart-wrap"></div></section>
       </section>
     </main>
   </div>

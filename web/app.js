@@ -43,7 +43,7 @@ const sweepPresetIterationChartWrap = document.getElementById('sweepPresetIterat
 const seidelPresetResult = document.getElementById('seidelPresetResult');
 const seidelPresetIterationTableWrap = document.getElementById('seidelPresetIterationTableWrap');
 const seidelPresetIterationChartWrap = document.getElementById('seidelPresetIterationChartWrap');
-const graph2PresetSection = document.getElementById('graph2PresetSection');
+const graph2PresetSection = document.getElementById('graph2CustomSection');
 
 const system2SizeInput = document.getElementById('system2SizeInput');
 const buildMatrix2Button = document.getElementById('buildMatrix2Button');
@@ -451,7 +451,18 @@ function buildMethodSummaryLines(result, options = {}) {
     lines.push(result.error);
   }
 
-  lines.push(result?.converged ? convergedText : notConvergedText);
+  // Для некоторых методов (например, Гаусса) в результате нет поля `converged`.
+  // В этом случае считаем метод успешным, если есть массив `solution` с данными.
+  let isConverged;
+  if (typeof result?.converged === 'boolean') {
+    isConverged = result.converged;
+  } else if (Array.isArray(result?.solution) && result.solution.length > 0) {
+    isConverged = true;
+  } else {
+    isConverged = false;
+  }
+
+  lines.push(isConverged ? convergedText : notConvergedText);
 
   const delta = result?.finalDelta;
   const residual = result?.finalResidual;
@@ -698,14 +709,11 @@ function fillPresetSystem() {
   buildMatrixEditor(presetSystem.matrix.length, presetSystem);
   epsilonInput.value = String(presetSystem.epsilon);
   maxIterationsInput.value = String(presetSystem.maxIterations);
-  presetSystemView.textContent = presetSystem.matrix
-    .map((row, index) => `${row.map((value, j) => `${value >= 0 ? ' ' : ''}${value.toFixed(2)}x${j + 1}`).join(' + ')} = ${presetSystem.vector[index].toFixed(2)}`)
-    .join('\n');
 }
 
-// solvePreset отправляет на сервер готовый вариант из задания.
+// solvePreset решает текущую заполненную систему задания 1.
 async function solvePreset() {
-  await solveSystem(presetSystem);
+  await solveSystem();
 }
 
 // solveCustom1 отправляет произвольную СЛАУ на сервер и рендерит результаты в custom контейнеры.
@@ -822,23 +830,10 @@ function fillPresetSystem2() {
   buildMatrixEditor2(presetSystem2.matrix.length, presetSystem2);
   epsilon2Input.value = String(presetSystem2.epsilon);
   maxIterations2Input.value = String(presetSystem2.maxIterations);
-  presetSystem2View.textContent = [
-    '8.00x1 + 2.00x2 = 15.00',
-    '-3.00x1 + 9.00x2 - 2.00x3 = 5.50',
-    '1.00x2 + 10.00x3 + 1.00x4 = 15.00',
-    '1.00x3 + 6.00x4 = 9.50',
-  ].join('\n');
 }
 
 async function solvePreset2() {
-  await solveTask2System(presetSystem2, {
-    sweepResult: sweepPresetResult,
-    sweepIterationTableWrap: sweepPresetIterationTableWrap,
-    sweepIterationChartWrap: sweepPresetIterationChartWrap,
-    seidelResult: seidelPresetResult,
-    iterationTableWrap: seidelPresetIterationTableWrap,
-    iterationChartWrap: seidelPresetIterationChartWrap,
-  });
+  await solveCustom2();
 }
 
 async function solveCustom2() {
@@ -873,7 +868,6 @@ function fillPresetEquation4() {
   equation4X0Input.value = presetEquation4.x0;
   equation4EpsilonInput.value = presetEquation4.epsilon;
   equation4MaxIterationsInput.value = presetEquation4.maxIterations;
-  presetSystem4View.textContent = `${presetEquation4.equation} = 0 на [${presetEquation4.a}, ${presetEquation4.b}]`;
 }
 
 function fillPreset3Info() {
@@ -1801,24 +1795,7 @@ function renderTask4Response(response, target) {
 }
 
 async function solvePreset4() {
-  await solveTask4Equation({
-    equation: presetEquation4.equation,
-    a: presetEquation4.a,
-    b: presetEquation4.b,
-    x0: presetEquation4.x0,
-    epsilon: presetEquation4.epsilon,
-    max_iterations: presetEquation4.maxIterations,
-  }, {
-    bisectionResult: bisectionPresetResult,
-    simpleIterationResult: simpleIterationPresetResult,
-    newtonResult: newtonPresetResult,
-    bisectionTableWrap: bisectionPresetIterationTableWrap,
-    bisectionChartWrap: bisectionPresetIterationChartWrap,
-    simpleIterationTableWrap: simpleIterationPresetIterationTableWrap,
-    simpleIterationChartWrap: simpleIterationPresetIterationChartWrap,
-    newtonTableWrap: newtonPresetIterationTableWrap,
-    newtonChartWrap: newtonPresetIterationChartWrap,
-  });
+  await solveCustom4();
 }
 
 async function solveCustom4() {
