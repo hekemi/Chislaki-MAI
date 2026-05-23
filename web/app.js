@@ -1,5 +1,5 @@
-// Этот файл отвечает только за интерфейс: он не содержит численных методов.
-// Его задача — получать данные из Go-сервера и рисовать удобную навигацию.
+// Этот файл отвечает только за интерфейс: он не содержит реализации методов.
+// Его задача — получать данные из Go-сервера и отрисовавать навигацию.
 
 const taskNav = document.getElementById('taskNav');
 const taskTitle = document.getElementById('taskTitle');
@@ -9,7 +9,7 @@ const serverStatus = document.getElementById('serverStatus');
 
 let tasksCache = [];
 
-// renderTaskButtons строит левую панель из данных, пришедших с backend.
+// renderTaskButtons отвечает левую панель из данных, пришедших с backend.
 function renderTaskButtons(tasks) {
   taskNav.innerHTML = '';
 
@@ -49,7 +49,7 @@ function activateTask(taskId) {
   taskMeta.textContent = JSON.stringify(task, null, 2);
 }
 
-// loadTasks получает данные из Go API и создает интерфейс.
+// loadTasks получает данные из Go API и поднимает интерфейс.
 async function loadTasks() {
   try {
     const response = await fetch('/api/tasks');

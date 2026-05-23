@@ -13,13 +13,10 @@ import (
 	"chislennie-metodi/internal/tasks"
 )
 
-// main запускает HTTP-сервер, который одновременно обслуживает:
+// main запускает HTTP-сервер, который обрабатывает:
 // - статический фронтенд из папки web,
 // - API со списком заданий,
 // - API для получения одного задания по номеру.
-//
-// Такой каркас удобен для модульной разработки: каждое задание можно
-// держать в отдельном пакете и расширять независимо от остальных.
 func main() {
 	mux := http.NewServeMux()
 
@@ -45,7 +42,6 @@ func handleTasksList(w http.ResponseWriter, r *http.Request) {
 }
 
 // handleTaskByID возвращает одно задание по номеру.
-// Этот endpoint пригодится позже, когда у каждого модуля появится собственная логика.
 func handleTaskByID(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
@@ -76,7 +72,6 @@ func handleTaskByID(w http.ResponseWriter, r *http.Request) {
 // handleFrontend отдает фронтенд-файлы.
 // Если запрошен конкретный файл из папки web, он отдается напрямую.
 // Если файл не найден, возвращается index.html, чтобы приложение открывалось
-// как единая оболочка и в будущем могло поддерживать маршруты по hash.
 func handleFrontend(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		requested := filepath.Join("web", filepath.FromSlash(strings.TrimPrefix(r.URL.Path, "/")))
