@@ -1,6 +1,5 @@
-// Этот файл отвечает только за интерфейс: он не содержит численных методов.
-// Его задача – получать данные из Go-сервера и рисовать удобную навигацию,
-// форму для СЛАУ, таблицу итераций и график сходимости.
+// Этот файл отвечает только за интерфейс: он не содержит реализации методов.
+// Его задача — получать данные из Go-сервера и отрисовавать навигацию.
 
 const taskNav = document.getElementById('taskNav');
 const taskTitle = document.getElementById('taskTitle');
@@ -62,44 +61,7 @@ const graph2CustomSection = document.getElementById('graph2CustomSection');
 
 let tasksCache = [];
 
-// Этот набор данных соответствует варианту 13 из изображения пользователя.
-// Он используется как готовый пример и как демонстрация для произвольного ввода.
-const presetSystem = {
-  matrix: [
-    [2.82, 0.43, -0.57],
-    [-0.35, 1.12, -0.48],
-    [0.48, 0.23, 2.37],
-  ],
-  vector: [0.48, 0.52, 1.44],
-  epsilon: 0.01,
-  maxIterations: 100,
-  initialGuess: [0, 0, 0],
-};
-
-// Исходная система для задания 2 (метод прогонки и метод Зейделя).
-const presetSystem2 = {
-  matrix: [
-    [8, 2, 0, 0],
-    [-3, 9, -2, 0],
-    [0, 1, 10, 1],
-    [0, 0, 1, 6],
-  ],
-  vector: [15, 5.5, 15, 9.5],
-  epsilon: 0.01,
-  maxIterations: 100,
-  initialGuess: [0, 0, 0, 0],
-};
-
-  const presetEquation4 = {
-    equation: '3*x - exp(x)',
-    a: 0,
-    b: 1,
-    x0: 1,
-    epsilon: 0.0001,
-    maxIterations: 100,
-  };
-
-// renderTaskButtons строит левую панель из данных, пришедших с backend.
+// renderTaskButtons отвечает левую панель из данных, пришедших с backend.
 function renderTaskButtons(tasks) {
   taskNav.innerHTML = '';
 
@@ -286,7 +248,7 @@ function activateTask(taskId) {
   }
 }
 
-// loadTasks получает данные из Go API и создает интерфейс.
+// loadTasks получает данные из Go API и поднимает интерфейс.
 async function loadTasks() {
   try {
     const response = await fetch('/api/tasks');
