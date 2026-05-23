@@ -477,3 +477,19 @@ ul {
     flex-direction: column;
   }
 }
+
+.task3-image-wrap {
+  margin-top: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 2px;
+  background: #fafafa;
+}
+.task3-image {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}

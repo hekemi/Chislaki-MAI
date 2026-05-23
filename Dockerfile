@@ -3,7 +3,7 @@ FROM golang:1.22-alpine AS builder
 WORKDIR /app
 
 # cache modules
-COPY go.mod go.sum ./
+COPY go.mod ./
 RUN go env -w GOPROXY=https://proxy.golang.org && go mod download
 
 COPY . .
@@ -12,7 +12,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 
 FROM alpine:3.18
 RUN adduser -D -H appuser
-COPY --from=builder /server /server
+WORKDIR /app
+COPY --from=builder /server /app/server
+COPY --from=builder /app/web /app/web
 USER appuser
 EXPOSE 8080
-ENTRYPOINT ["/server"]
+ENTRYPOINT ["/app/server"]
