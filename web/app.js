@@ -61,15 +61,15 @@ const graph2CustomSection = document.getElementById('graph2CustomSection');
 
 let tasksCache = [];
 
-// Этот набор данных соответствует варианту 13 из изображения пользователя.
+// Этот набор данных соответствует варианту 20 из изображения пользователя.
 // Он используется как готовый пример и как демонстрация для произвольного ввода.
 const presetSystem = {
   matrix: [
-    [2.82, 0.43, -0.57],
-    [-0.35, 1.12, -0.48],
-    [0.48, 0.23, 2.37],
+    [1.22, -0.25, 0.13],
+    [-2.09, 3.17, 0.23],
+    [0.23, -2.40, 5.05],
   ],
-  vector: [0.48, 0.52, 1.44],
+  vector: [4.06, 4.05, 1.21],
   epsilon: 0.01,
   maxIterations: 100,
   initialGuess: [0, 0, 0],
@@ -78,19 +78,19 @@ const presetSystem = {
 // Исходная система для задания 2 (метод прогонки и метод Зейделя).
 const presetSystem2 = {
   matrix: [
-    [8, 2, 0, 0],
-    [-3, 9, -2, 0],
-    [0, 1, 10, 1],
-    [0, 0, 1, 6],
+    [-9, 3, 0, 0],
+    [3, -8, -2, 0],
+    [0, 2, -9, 5],
+    [0, 0, 1, -5],
   ],
-  vector: [15, 5.5, 15, 9.5],
+  vector: [-3.4, 1.7, 2.2, 5.5],
   epsilon: 0.01,
   maxIterations: 100,
   initialGuess: [0, 0, 0, 0],
 };
 
   const presetEquation4 = {
-    equation: '3*x - exp(x)',
+    equation: 'sin(x) - (x+1)*(x+1)',
     a: 0,
     b: 1,
     x0: 1,
@@ -1100,17 +1100,17 @@ function renderTask6Response(response) {
 }
 
 const task7PresetPoints = [
-  { x: 0.0, y: 1.0 },
-  { x: 0.12, y: 1.2 },
-  { x: 0.19, y: 1.6 },
-  { x: 0.35, y: 2.6 },
-  { x: 0.4, y: 1.8 },
-  { x: 0.45, y: 2.7 },
-  { x: 0.62, y: 3.5 },
-  { x: 0.71, y: 4.4 },
-  { x: 0.84, y: 4.5 },
-  { x: 0.91, y: 5.2 },
-  { x: 1.0, y: 6.3 },
+	{x: 0.00, y: 0.0},
+  {x: 0.15, y: 1.0},
+	{x: 0.30, y: 2.3},
+	{x: 0.45, y: 2.9},
+	{x: 0.60, y: 3.8},
+	{x: 0.75, y: 4.9},
+	{x: 0.90, y: 6.8},
+	{x: 1.05, y: 7.1},
+	{x: 1.20, y: 7.6},
+	{x: 1.35, y: 9.4},
+	{x: 1.50, y: 9.5},
 ];
 
 function formatTask7Table(points) {
@@ -1381,7 +1381,7 @@ function renderDerivativesResults(response) {
 
 async function solveTask9() {
   try {
-    const equation = equation9Input.value || 'cos(x^2)/(x+1)';
+    const equation = equation9Input.value || 'sin(x)/exp(x*x)';
     const a = parseFloat(a9Input.value) || 0;
     const b = parseFloat(b9Input.value) || 1;
     const eps = parseFloat(eps9Input.value) || 1e-4;
@@ -1408,7 +1408,7 @@ async function solveTask9() {
 
 async function solveTask10() {
   try {
-    const equation = equation10Input.value || '1 + 0.8*y*sin(x) - 2*y*y';
+    const equation = equation10Input.value || 'x-y*y*y*x+5*y';
     const a = parseFloat(a10Input.value) || 0;
     const b = parseFloat(b10Input.value) || 1;
     const y0 = parseFloat(y0Input.value) || 0;
@@ -1942,7 +1942,7 @@ if (saveTask3InfoButton) {
 
   if (fillPreset9Button) {
     fillPreset9Button.addEventListener('click', () => {
-      if (equation9Input) equation9Input.value = 'cos(x^2)/(x+1)';
+      if (equation9Input) equation9Input.value = 'sin(x)/exp(x*x)';
       if (a9Input) a9Input.value = '0';
       if (b9Input) b9Input.value = '1';
       if (eps9Input) eps9Input.value = '1e-4';
@@ -1951,7 +1951,7 @@ if (saveTask3InfoButton) {
 
   if (fillPreset10Button) {
     fillPreset10Button.addEventListener('click', () => {
-      if (equation10Input) equation10Input.value = "1 + 0.8*y*sin(x) - 2*y*y";
+      if (equation10Input) equation10Input.value = "x-y*y*y*x+5*y";
       if (a10Input) a10Input.value = '0';
       if (b10Input) b10Input.value = '1';
       if (y0Input) y0Input.value = '0';

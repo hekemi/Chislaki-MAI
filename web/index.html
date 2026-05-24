@@ -37,11 +37,11 @@
         <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13</h4>
-              <p class="subcard__note">Система подставляется кнопкой «Заполнить», но любые данные можно изменить вручную.</p>
+              <h4>Исходное задание из варианта 20</h4>
+              <p class="subcard__note">Система подставляется кнопкой «Заполнить значениями варианта 20», но любые данные можно изменить вручную.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPresetButton" type="button">Заполнить</button>
+              <button class="action-button" id="fillPresetButton" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePresetButton" type="button">Рассчитать</button>
               <button class="action-button" id="showGraphButton" type="button">К графику</button>
             </div>
@@ -112,17 +112,17 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13</h4>
+              <h4>Исходное задание из варианта 20</h4>
               <p class="subcard__note">Введите f(x,y), начальное условие y(a)=y0, отрезок и шаг h</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset10Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset10Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset10Button" type="button">Рассчитать</button>
             </div>
           </div>
 
           <div>
-            <label class="field-label">y' = f(x,y) <input id="equation10Input" type="text" value="1 + 0.8*y*sin(x) - 2*y*y" /></label>
+            <label class="field-label">y' = f(x,y) <input id="equation10Input" type="text" value="x-y*y*y*x+5*y" /></label>
             <label class="field-label">a <input id="a10Input" type="number" step="0.0001" value="0" /></label>
             <label class="field-label">b <input id="b10Input" type="number" step="0.0001" value="1" /></label>
             <label class="field-label">y(a) <input id="y0Input" type="number" step="0.0001" value="0" /></label>
@@ -153,11 +153,11 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: общий вид уравнения</h4>
+              <h4>Исходное задание из варианта 20: общий вид уравнения</h4>
               <p class="subcard__note">y'' + p(x)y' + q(x)y = f(x), границы: α1 y(a)+β1 y'(a)=γ1 и α2 y(b)+β2 y'(b)=γ2</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset11Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset11Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset11Button" type="button">Рассчитать</button>
             </div>
           </div>
@@ -206,17 +206,17 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: интеграл</h4>
+              <h4>Исходное задание из варианта 20: интеграл</h4>
               <p class="subcard__note">Введите функцию f(x), нижний и верхний пределы и точность ε</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset9Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset9Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset9Button" type="button">Рассчитать</button>
             </div>
           </div>
 
           <div>
-            <label class="field-label">f(x) <input id="equation9Input" type="text" value="cos(x^2)/(x+1)" /></label>
+            <label class="field-label">f(x) <input id="equation9Input" type="text" value="sin(x)/exp(x*x)" /></label>
             <label class="field-label">a <input id="a9Input" type="number" step="0.0001" value="0" /></label>
             <label class="field-label">b <input id="b9Input" type="number" step="0.0001" value="1" /></label>
             <label class="field-label">ε <input id="eps9Input" type="number" step="1e-6" value="1e-4" /></label>
@@ -242,11 +242,11 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: таблица (CSV)</h4>
+              <h4>Исходное задание из варианта 20: таблица (CSV)</h4>
               <p class="subcard__note">Каждая строка: xi, yi – можно редактировать и пересчитать</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset8Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset8Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset8Button" type="button">Рассчитать</button>
             </div>
           </div>
@@ -263,8 +263,8 @@
 0.91,5.2
 1.0,6.3</textarea>
           <div class="inline-controls" style="margin-top:8px;">
-            <label class="field-label">x1 <input id="x1Input" type="number" step="0.0001" value="0.35" /></label>
-            <label class="field-label">x2 <input id="x2Input" type="number" step="0.0001" value="1.0" /></label>
+            <label class="field-label">x1 <input id="x1Input" type="number" step="0.0001" value="1.283" /></label>
+            <label class="field-label">x2 <input id="x2Input" type="number" step="0.0001" value="1.225" /></label>
           </div>
         </section>
 
@@ -287,28 +287,28 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13</h4>
-              <p class="subcard__note">Набор узлов вводится как CSV: каждая строка "xi, yi"</p>
+              <h4>Исходное задание из варианта 20</h4>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset5Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset5Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset5Button" type="button">Рассчитать</button>
             </div>
           </div>
 
-          <pre id="presetSystem5View" class="equation-view equation-view--large">Узлы: см. пример; x* = 1.3862</pre>
+          <pre id="presetSystem5View" class="equation-view equation-view--large">Узлы: см. пример; x* = 1.283</pre>
         </section>
 
         <section class="subcard">
-          <h4>Ввод узлов (CSV)</h4>
-          <textarea id="nodesCsvInput" rows="6" style="width:100%;">1.375,5.04192
-1.379,5.17744
-1.383,5.32016
-1.387,5.47069
-1.391,5.62968
-1.395,5.79788</textarea>
+          <h4>Ввод узлов</h4>
+          <p class="subcard__note">Набор узлов вводится как CSV: каждая строка "xi, yi"</p>
+          <textarea id="nodesCsvInput" rows="6" style="width:100%;">1.205,3.02121
+1.225,4.70944
+1.245,7.37816
+1.265,9.40069
+1.285,8.44368
+1.305,7.70688</textarea>
           <div class="inline-controls" style="margin-top:8px;">
-            <label class="field-label">x* <input id="xStarInput" type="number" step="0.0001" value="1.3862" /></label>
+            <label class="field-label">x* <input id="xStarInput" type="number" step="0.0001" value="1.283" /></label>
           </div>
         </section>
 
@@ -333,11 +333,10 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: узлы</h4>
-              <p class="subcard__note">CSV: каждая строка содержит xi и yi</p>
+              <h4>Исходное задание из варианта 20</h4>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset6Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset6Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset6Button" type="button">Рассчитать</button>
             </div>
           </div>
@@ -347,14 +346,15 @@
 
         <section class="subcard">
           <h4>Ввод узлов</h4>
-          <textarea id="nodesCsv6Input" rows="6" style="width:100%;">1.375,5.04192
-1.379,5.17744
-1.383,5.32016
-1.387,5.47069
-1.391,5.62968
-1.395,5.79788</textarea>
+          <p class="subcard__note">CSV: каждая строка содержит xi и yi</p>
+          <textarea id="nodesCsv6Input" rows="6" style="width:100%;">1.205,3.02121
+1.225,4.70944
+1.245,7.37816
+1.265,9.40069
+1.285,8.44368
+1.305,7.70688</textarea>
           <div class="inline-controls" style="margin-top:8px;">
-            <label class="field-label">x* <input id="xStar6Input" type="number" step="0.0001" value="1.3862" /></label>
+            <label class="field-label">x* <input id="xStar6Input" type="number" step="0.0001" value="1.283" /></label>
             <label class="field-label">S''(x1) <input id="boundaryLeftInput" type="number" step="0.000001" placeholder="пусто = натуральный" /></label>
             <label class="field-label">S''(xn) <input id="boundaryRightInput" type="number" step="0.000001" placeholder="пусто = натуральный" /></label>
             <label class="field-label" title="Вычислять S(x) во всех x из таблицы узлов">
@@ -384,19 +384,18 @@
         <section class="subcard subcard--source">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: таблица</h4>
+              <h4>Исходное задание из варианта 20</h4>
               <p class="subcard__note">Данные берутся из задания: xi и yi</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset7Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset7Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset7Button" type="button">Рассчитать</button>
             </div>
           </div>
 
-          <pre id="presetSystem7View" class="equation-view equation-view--large"></pre>
           <div style="margin-top:8px;">
             <label class="field-label">Ввести свои узлы (каждая строка: x y или x,y):</label>
-            <textarea id="nodesCsv7Input" rows="8" style="width:100%; font-family: monospace;" placeholder="0.0,1.0\n0.12,1.2\n..."></textarea>
+            <textarea id="nodesCsv7Input" rows="8" style="width:100%; font-family: monospace;"></textarea>
           </div>
         </section>
 
@@ -420,11 +419,11 @@
         <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13</h4>
-              <p class="subcard__note">Система подставляется кнопкой «Заполнить», но любые данные можно изменить вручную.</p>
+              <h4>Исходное задание из варианта 20</h4>
+              <p class="subcard__note">Система подставляется кнопкой «Заполнить значениями варианта 20», но любые данные можно изменить вручную.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset2Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset2Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset2Button" type="button">Рассчитать</button>
               <button class="action-button" id="showGraph2Button" type="button">К графику</button>
             </div>
@@ -509,11 +508,11 @@
         <section class="subcard custom-slau-section">
           <div class="subcard__header">
             <div>
-              <h4>Исходное задание из варианта 13: 3x - e^x = 0</h4>
-              <p class="subcard__note">На отрезке [0, 1]. Нажми «Заполнить», если нужно вернуть исходный пример.</p>
+              <h4>Исходное задание из варианта 20: 3x - e^x = 0</h4>
+              <p class="subcard__note">На отрезке [0, 1]. Нажми «Заполнить значениями варианта 20», если нужно вернуть исходный пример.</p>
             </div>
             <div class="panel-actions panel-actions--compact">
-              <button class="action-button" id="fillPreset4Button" type="button">Заполнить</button>
+              <button class="action-button" id="fillPreset4Button" type="button">Заполнить значениями варианта 20</button>
               <button class="action-button action-button--primary" id="solvePreset4Button" type="button">Рассчитать</button>
             </div>
           </div>

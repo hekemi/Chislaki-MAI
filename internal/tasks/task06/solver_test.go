@@ -7,12 +7,12 @@ import (
 
 func TestBuildSplineNatural_InterpolatesNodesAndNaturalBoundaries(t *testing.T) {
 	nodes := [][2]float64{
-		{1.375, 5.04192},
-		{1.379, 5.17744},
-		{1.383, 5.32016},
-		{1.387, 5.47069},
-		{1.391, 5.62968},
-		{1.395, 5.79788},
+		{1.205, 3.02121},
+		{1.225, 4.70944},
+		{1.245, 7.37816},
+		{1.265, 9.40069},
+		{1.285, 8.44368},
+		{1.305, 7.70688},
 	}
 
 	segments, left, right, err := buildSplineWithBoundaries(nodes, nil, nil)

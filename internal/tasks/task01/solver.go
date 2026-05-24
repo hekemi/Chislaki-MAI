@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"math"
 	"strings"
-
 	"chislennie-metodi/internal/taskmeta"
 )
 
 // SolveRequest описывает входные данные для решения СЛАУ.
-//
 // Поля специально сделаны универсальными, чтобы можно было решать не только
 // один конкретный вариант из задания, но и произвольную квадратную СЛАУ.
 type SolveRequest struct {
@@ -65,16 +63,16 @@ type SolveResponse struct {
 	Notes     []string        `json:"notes,omitempty"`
 }
 
-// DefaultRequest возвращает систему из варианта 13, которую можно сразу
+// DefaultRequest возвращает систему из варианта 20, которую можно сразу
 // показать в интерфейсе как готовый пример для расчета.
 func DefaultRequest() SolveRequest {
 	return SolveRequest{
 		Matrix: [][]float64{
-			{2.82, 0.43, -0.57},
-			{-0.35, 1.12, -0.48},
-			{0.48, 0.23, 2.37},
+			{1.22, -0.25, 0.13},
+			{-2.09, 3.17, 0.23},
+			{0.23, -2.40, 5.05},
 		},
-		Vector:        []float64{0.48, 0.52, 1.44},
+		Vector:        []float64{4.06, 4.05, 1.21},
 		Epsilon:       0.01,
 		MaxIterations: 100,
 		InitialGuess:  []float64{0, 0, 0},
@@ -125,8 +123,7 @@ func Solve(req SolveRequest) SolveResponse {
 	return resp
 }
 
-// normalizeRequest приводит входные данные к безопасному виду.
-// Это нужно, чтобы фронтенд мог прислать неполный JSON, а сервер сам
+// normalizeRequest чтобы фронтенд мог прислать неполный JSON, а сервер сам
 // подставил значения по умолчанию.
 func normalizeRequest(req SolveRequest) SolveRequest {
 	if len(req.Matrix) == 0 || len(req.Vector) == 0 {
@@ -214,7 +211,6 @@ func solveGaussian(matrix [][]float64, vector []float64) ([]float64, []GaussianS
 }
 
 // solveJacobi реализует метод простой итерации для СЛАУ.
-//
 // Внутри метода мы записываем все приближения. Именно они потом идут в таблицу,
 // а значения residual можно использовать для построения графика сходимости.
 func solveJacobi(matrix [][]float64, vector []float64, epsilon float64, maxIterations int, initialGuess []float64) ([]float64, []IterationRow, bool, error, float64, float64) {
