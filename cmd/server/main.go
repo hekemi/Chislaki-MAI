@@ -1,12 +1,13 @@
 package main
 
 import (
+	"embed"
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"log"
 	"net/http"
-	"os"
-	"path/filepath"
+	"path"
 	"strconv"
 	"strings"
 
@@ -23,8 +24,25 @@ import (
 	"chislennie-metodi/internal/tasks/task11"
 )
 
+//go:embed web
+var embeddedWeb embed.FS
+
+var (
+	webRoot        fs.FS
+	frontendHandler http.Handler
+)
+
+func init() {
+	sub, err := fs.Sub(embeddedWeb, "web")
+	if err != nil {
+		log.Fatal(err)
+	}
+	webRoot = sub
+	frontendHandler = http.FileServer(http.FS(webRoot))
+}
+
 // main запускает HTTP-сервер, который обрабатывает:
-// - статический фронтенд из папки web,
+// - статический фронтенд из папки web,http://127.0.0.1:8080
 // - API со списком заданий,
 // - API для получения одного задания по номеру.
 func main() {
@@ -44,8 +62,8 @@ func main() {
 	mux.HandleFunc("/api/task11/solve", handleTask11Solve)
 	mux.HandleFunc("/", handleFrontend)
 
-	addr := ":8080"
-	log.Printf("server started at http://localhost%s", addr)
+	addr := "127.0.0.1:18080"
+	log.Printf("server started at http://%s", addr)
 	if err := http.ListenAndServe(addr, mux); err != nil {
 		log.Fatal(err)
 	}
@@ -70,7 +88,7 @@ func handleTaskByID(w http.ResponseWriter, r *http.Request) {
 
 	path := strings.TrimPrefix(r.URL.Path, "/api/tasks/")
 	if path == "" {
-		http.Error(w, "task id is required", http.StatusBadRequest)
+		writeJSON(w, http.StatusOK, tasks.All())
 		return
 	}
 
@@ -140,19 +158,32 @@ func handleTask4Solve(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, task04.Solve(req))
 }
 
-// handleFrontend отдает фронтенд-файлы.
-// Если запрошен конкретный файл из папки web, он отдается напрямую.
-// Если файл не найден, возвращается index.html, чтобы приложение открывалось
+// handleFrontend отдает встроенные фронтенд-файлы из exe.
 func handleFrontend(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		requested := filepath.Join("web", filepath.FromSlash(strings.TrimPrefix(r.URL.Path, "/")))
-		if info, err := os.Stat(requested); err == nil && !info.IsDir() {
-			http.ServeFile(w, r, requested)
-			return
-		}
+	if r.URL.Path == "/" {
+		serveEmbeddedIndex(w)
+		return
 	}
 
-	http.ServeFile(w, r, filepath.Join("web", "index.html"))
+	// Файлы со "точкой" считаем статикой: /app.js, /styles.css, /images/...
+	if strings.Contains(path.Base(r.URL.Path), ".") {
+		frontendHandler.ServeHTTP(w, r)
+		return
+	}
+
+	// Для роутов SPA возвращаем index.html
+	serveEmbeddedIndex(w)
+}
+
+func serveEmbeddedIndex(w http.ResponseWriter) {
+	data, err := fs.ReadFile(webRoot, "index.html")
+	if err != nil {
+		http.Error(w, "index.html not found", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	_, _ = w.Write(data)
 }
 
 // handleTask5Solve принимает данные для интерполяции и возвращает результаты
